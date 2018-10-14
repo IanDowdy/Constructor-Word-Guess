@@ -1,19 +1,36 @@
-function Word() {
-    this.lettersInWord = [];
+let Letter = require("./Letter")
 
-    this.displayWord = function() {
+let display = [];
+  let letterArrays = [];
+
+let Word = function (assignedWord) {
+
+    //let display = [];
+  
+    this.lettersInWord = assignedWord.split("");
+
+    this.displayWord = function () {
         for (i = 0; i < lettersInWord.length; i++) {
-            let temp = Letter.obtainLetter();
-            let display = push(temp);
+            let tempLetter = lettersInWord[i];
+            let temp = new Letter(tempLetter);
+            letterArrays.push(temp);
+            display += temp.obtainLetter();
         }
         console.log(display)
     }
-
-    this.checkGuess = function(char) {
-        for (i = 0; i < lettersInWord.length; i++) {
-            lettersInWords[i].checkLetter();
+    //A function that takes a character as an argument and
+    //calls the guess function on each letter object (the second function defined in `Letter.js`)
+    this.checkGuess = function () {
+        for (x = 0; x < letterArrays.length; x++) {
+            console.log(letterArrays[x].letterAssigned);
         }
     }
 
 
 }
+
+Word("fart");
+displayWord();
+checkGuess();
+
+
