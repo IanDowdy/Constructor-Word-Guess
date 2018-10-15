@@ -5,9 +5,11 @@ let Letter = function(letterAssigned) {
     this.letterAssigned = letterAssigned;
     //all guesses start at false.
     this.letterGuessed = false;
+    
     this.obtainLetter = function () {
-        if (this.letterGuessed) {
-            return letterValue;
+        console.log(this.letterGuessed)
+        if (this.letterGuessed === true) {
+            return letterAssigned;
             //console.log(letterValue);
         } else {
             return "_";
@@ -16,11 +18,14 @@ let Letter = function(letterAssigned) {
     }
     //the actual comparison function.
     this.checkLetter = function (guess) {
-        console.log("works up to here!")
-        if (this.letterAssigned === guess) {
+        
+        if (letterAssigned === guess) {
             console.log("correct!");
-            letterGuessed = true;
-        } 
+            this.letterGuessed = true;
+            console.log(this.letterGuessed)
+        } else {
+            console.log("You\'re dumb!")
+        }
     }
 
 }
