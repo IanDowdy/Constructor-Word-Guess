@@ -1,21 +1,22 @@
 let Letter = require("./Letter")
 
 let display = [];
-  let letterArrays = [];
+let letterArrays = [];
+let letterObj = [];
 
 let Word = function (assignedWord) {
 
-    //let display = [];
-  
+    //run the Letter constructor loop when Word is fired.
+
     this.lettersInWord = assignedWord.split("");
 
+    for (i = 0; i < lettersInWord.length; i++) {
+        let letterObj = new Letter(lettersInWord[i]);
+        letterArrays.push(letterObj);
+    }
     this.displayWord = function () {
-        for (i = 0; i < lettersInWord.length; i++) {
-            let letterObj = new Letter(lettersInWord[i]);
-            //let tempLetter = lettersInWord[i];
-            //let temp = new Letter(tempLetter);
-            letterArrays.push(letterObj);
-            display += letterObj.obtainLetter();
+        for (r = 0; r < letterArrays.length; r++) {
+            display += letterArrays[r].obtainLetter();
         }
         console.log(display)
     }
@@ -24,16 +25,12 @@ let Word = function (assignedWord) {
     this.checkGuess = function (guess) {
         console.log(guess)
         for (x = 0; x < letterArrays.length; x++) {
-            console.log(guess)
-           letterArrays[x].checkLetter(guess);
+            letterArrays[x].checkLetter(guess);
         }
     }
 
 
 }
 
-Word("fart");
-checkGuess("a");
-displayWord();
-
+module.exports = Word;
 
