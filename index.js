@@ -18,7 +18,7 @@ function gameStart() {
             type: 'confirm',
             message: "Are you ready to play some Hangman?"
         }
-    ]).then(function(response) {
+    ]).then(function (response) {
         console.log(chalk.blue("Welcome Node Constructor hangman!"));
     })
 }
