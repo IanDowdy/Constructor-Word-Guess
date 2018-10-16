@@ -19,6 +19,19 @@ let Word = function (assignedWord) {
             display += letterArrays[r].obtainLetter();
         }
         console.log(display)
+        display = [];
+    }
+    this.checkComplete = function () {
+        //console.log(letterArrays)
+        for (g = 0; g < letterArrays.length; g++) {
+            if (letterArrays[g].letterGuessed === false) {
+                console.log("not there yet")
+                return;
+            } else {
+                console.log('complete')
+                wordCompleted = true;
+            }
+        }
     }
     //A function that takes a character as an argument and
     //calls the guess function on each letter object (the second function defined in `Letter.js`)
@@ -32,5 +45,5 @@ let Word = function (assignedWord) {
 
 }
 
-module.exports = Word;
+module.exports = Word, letterArrays;
 

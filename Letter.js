@@ -19,11 +19,9 @@ let Letter = function(letterAssigned) {
     this.checkLetter = function (guess) {
         
         if (letterAssigned == guess) {
-            console.log("correct!");
+            //console.log("correct!");
             this.letterGuessed = true;
-            console.log(this.letterGuessed)
-        } else {
-            console.log("You\'re dumb!")
+            //console.log(this.letterGuessed)
         }
     }
 
