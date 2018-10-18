@@ -17,11 +17,10 @@ let Letter = function(letterAssigned) {
     }
     //the actual comparison function.
     this.checkLetter = function (guess) {
-        
-        if (letterAssigned == guess) {
-            //console.log("correct!");
+        if (letterAssigned === guess) {
+            //console.log("correct!", letterAssigned, guess);
             this.letterGuessed = true;
-            //console.log(this.letterGuessed)
+            //console.log("wrong", letterAssigned, guess)
         }
     }
 

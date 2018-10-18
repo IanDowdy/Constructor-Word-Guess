@@ -2,32 +2,33 @@ let word = require("./Word");
 let inquirer = require("inquirer");
 let chalk = require("chalk");
 
+round = 0;
+let wordList = ["sabrina", "seven", "pepper", "tulip"];
+let usedWords = [];
+//word("rim");
+//checkGuess("r");
 
 let selectedWord;
 let attemptsLeft;
 let wordCompleted;
 
 function gameplay() {
-    if(attemptsLeft > 0) {
+    if (attemptsLeft > 0) {
         inquirer.prompt([
             {
                 type: "input",
                 name: "selection",
                 message: "Choose a letter"
             }
-        ]).then(function(letterChoice){ 
+        ]).then(function (letterChoice) {
             let playerGuess = letterChoice.selection;
-            //console.log(letterChoice.selection);
             checkGuess(playerGuess);
-            //display = [];
             displayWord();
-            
             checkComplete();
-           
-            if (attemptsLeft === 0 || wordCompleted === true) {
-                endRound();
-            } else {
+            if (attemptsLeft > 0) {
                 gameplay();
+            } else {
+                gameOver();
             }
         })
     }
@@ -43,29 +44,31 @@ function endRound() {
         }
     }
     console.log(wordList, usedWords);
-}
-
-round = 0;
-let wordList = ["sabrina", "seven", "pepper", "tulip"];
-let usedWords = [];
-//word("rim");
-//checkGuess("r");
-
-function guessChecker(object) {
-    if (!object.letterGuessed){
-    return;
-} else {
-    endRound();
-}
+    inquirer.prompt([
+        {
+            name: "newGame",
+            type: "confirm",
+            message: "Would you like to play again?"
+        }
+    ]).then(function (response) {
+        if (response.newGame) {
+            newGame();
+        } else {
+            console.log(chalk.bgRed("Well buzz off then!"))
+        }
+    });
 }
 
 function gameStart() {
     selectedWord = wordList[Math.floor(Math.random() * wordList.length)];
-     attemptsLeft = selectedWord.length + 5;
+    attemptsLeft = selectedWord.length + 5;
     let wordCompleted = false;
     console.log(selectedWord, attemptsLeft);
     word(selectedWord);
-    
+    console.log(chalk.blue("     You will start this round with ") + chalk.bgBlue(attemptsLeft) + chalk.blue(" attempts. Good Luck!"));
+}
+
+function intro() {
 
     inquirer.prompt([
         {
@@ -74,10 +77,31 @@ function gameStart() {
             message: "Are you ready to play some Hangman?"
         }
     ]).then(function (response) {
-        console.log(chalk.blue("Welcome Node Constructor hangman!"));
-        console.log(chalk.blue("You will start this round with ") + chalk.bgBlue(attemptsLeft) + chalk.blue(" attempts. Good Luck!"))
-       gameplay();
+        if (response.introduction) {
+            console.log(chalk.blue("    Welcome Node Constructor hangman!"));
+            gameStart();
+            displayWord();
+            gameplay();
+        } else {
+            console.log(chalk.bgRed("WELL HANGMAN DOESN\'T WANT TO PLAY WITH YOU EITHER!"));
+        }
     })
 }
 
-gameStart();
+function checkComplete() {
+    //console.log(letterArrays)
+    if (display.trim() === selectedWord) {
+        wordCompleted = true;
+        endRound();
+    }
+}
+
+function newGame() {
+    letterArray = [];
+    letterObj = [];
+    display = [];
+    wordCompleted = false;
+    gameStart();
+}
+
+intro();
